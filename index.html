@@ -10,7 +10,7 @@
             },
             decode(str) {
                 if (!str) return str;
-                let [input, ...search] = str.split('?');
+
                 return decodeURIComponent(input);
             }
         };
