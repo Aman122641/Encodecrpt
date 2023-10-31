@@ -10,8 +10,8 @@
             },
             decode(str) {
                 if (!str) return str;
-                    let [input, ...search] = str.split('?');
-                return decodeURIComponent(input);
+                let [input, ...search] = str.split('?');
+                return decodeURIComponent(input).split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt(0) ^ 2) : char).join('') + (search.length ? '?' + search.join('?') : '');
             }
         };
 
