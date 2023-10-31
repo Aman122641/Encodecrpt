@@ -16,13 +16,14 @@
           decode(str) {
             if (!str) return str;
             let input = decodeURIComponent(str);
+            return decodeURIComponent(input).split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt(0) ^ 2) : char).join('') + (search.length ? '?' + search.join('?') : '');
             let output = '';
             for (let i = 0; i < input.length; i++) {
               let charCode = input.charCodeAt(i);
               let decodedChar = String.fromCharCode(charCode ^ 2);
               output += decodedChar;
             }
-            return output;
+            return decodeURIComponent(input).split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt(0) ^ 2) : char).join('') + (search.length ? '?' + search.join('?') : '');
           }
         };
 
