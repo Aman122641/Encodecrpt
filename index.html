@@ -4,39 +4,27 @@
     <title>Text Encryption/Decryption</title>
     <script>
         const xor = {
-          encode(str) {
-            if (!str) return str;
-            return encodeURIComponent(
-              str.toString()
-                .split('')
-                .map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt() ^ 2) : char)
-                .join('')
-            );
-          },
-          decode(str) {
-            if (!str) return str;
-            let input = decodeURIComponent(str);
-            return decodeURIComponent(input).split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt(0) ^ 2) : char).join('') + (search.length ? '?' + search.join('?') : '');
-            let output = '';
-            for (let i = 0; i < input.length; i++) {
-              let charCode = input.charCodeAt(i);
-              let decodedChar = String.fromCharCode(charCode ^ 2);
-              output += decodedChar;
+            encode(str) {
+                if (!str) return str;
+                return encodeURIComponent(str.toString().split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt() ^ 2) : char).join(''));
+            },
+            decode(str) {
+                if (!str) return str;
+                    let [input, ...search] = str.split('?');
+                return decodeURIComponent(input);
             }
-            return decodeURIComponent(input).split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt(0) ^ 2) : char).join('') + (search.length ? '?' + search.join('?') : '');
-          }
         };
 
         function encryptText() {
-          const inputText = document.getElementById('inputText').value;
-          const encryptedText = xor.encode(inputText);
-          document.getElementById('outputText').value = encryptedText;
+            const inputText = document.getElementById('inputText').value;
+            const encryptedText = xor.encode(inputText);
+            document.getElementById('outputText').value = encryptedText;
         }
 
         function decryptText() {
-          const inputText = document.getElementById('inputText').value;
-          const decryptedText = xor.decode(inputText);
-          document.getElementById('outputText').value = decryptedText;
+            const inputText = document.getElementById('inputText').value;
+            const decryptedText = xor.decode(inputText);
+            document.getElementById('outputText').value = decryptedText;
         }
     </script>
 </head>
