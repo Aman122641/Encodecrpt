@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Encryption/Decryption</title>
+    <script>
+        const xor = {
+            encode(str) {
+                if (!str) return str;
+                return encodeURIComponent(str.toString().split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt() ^ 2) : char).join(''));
+            },
+            decode(str) {
+                if (!str) return str;
+                let [input, ...search] = str.split('?');
+                return decodeURIComponent(input);
+            }
+        };
+
+        function encryptText() {
+            const inputText = document.getElementById('inputText').value;
+            const encryptedText = xor.encode(inputText);
+            document.getElementById('outputText').value = encryptedText;
+        }
+
+        function decryptText() {
+            const inputText = document.getElementById('inputText').value;
+            const decryptedText = xor.decode(inputText);
+            document.getElementById('outputText').value = decryptedText;
+        }
+    </script>
+</head>
+<body>
+    <h1>Text Encryption/Decryption</h1>
+    <label for="inputText">Input Text:</label>
+    <input type="text" id="inputText" name="inputText"><br><br>
+    <button onclick="encryptText()">Encrypt</button>
+    <button onclick="decryptText()">Decrypt</button><br><br>
+    <label for="outputText">Output Text:</label>
+    <input type="text" id="outputText" name="outputText" readonly>
+</body>
+</html>
